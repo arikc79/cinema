@@ -25,7 +25,7 @@ services:
     runtime: python
     schedule: "*/14 * * * *"
     buildCommand: echo ok
-    startCommand: curl -s https://cinema.onrender.com/ping/ || true
+    startCommand: curl -s https://cinema-1zo1.onrender.com/ping/ || true
 
 databases:
   - name: cinema-db
