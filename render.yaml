@@ -5,7 +5,7 @@ services:
     rootDir: My_first
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py seed --no-posters
     startCommand: gunicorn My_first.wsgi:application
-    healthCheckPath: /
+    healthCheckPath: /ping/
     envVars:
       - key: SECRET_KEY
         generateValue: true
@@ -19,6 +19,13 @@ services:
           property: connectionString
       - key: PYTHON_VERSION
         value: 3.11.0
+
+  - type: cron
+    name: cinema-keepalive
+    runtime: python
+    schedule: "*/14 * * * *"
+    buildCommand: echo ok
+    startCommand: curl -s https://cinema.onrender.com/ping/ || true
 
 databases:
   - name: cinema-db

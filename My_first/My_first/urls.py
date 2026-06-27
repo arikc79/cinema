@@ -2,9 +2,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
 from cinema.views import register_view
 
 urlpatterns = [
+    path('ping/', lambda r: HttpResponse('ok'), name='ping'),
     path('admin/', admin.site.urls),
     path('accounts/register/', register_view, name='register'),
     path('accounts/', include('django.contrib.auth.urls')),
