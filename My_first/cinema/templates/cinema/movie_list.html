@@ -84,6 +84,8 @@
                     <a href="{% url 'movie_detail' movie.pk %}" class="text-decoration-none">
                         {% if movie.poster %}
                             <img src="{{ movie.poster.url }}" class="card-img-top movie-poster" alt="{{ movie.title }}">
+                        {% elif movie.poster_url %}
+                            <img src="{{ movie.poster_url }}" class="card-img-top movie-poster" alt="{{ movie.title }}">
                         {% else %}
                             <div class="placeholder-poster">
                                 <i class="fas fa-film"></i>

@@ -23,6 +23,8 @@
             <div class="card mb-3">
                 {% if object.poster %}
                     <img src="{{ object.poster.url }}" class="card-img-top" alt="{{ object.title }}" style="max-height: 300px; object-fit: cover;">
+                {% elif object.poster_url %}
+                    <img src="{{ object.poster_url }}" class="card-img-top" alt="{{ object.title }}" style="max-height: 300px; object-fit: cover;">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ object.title }} ({{ object.year }})</h5>

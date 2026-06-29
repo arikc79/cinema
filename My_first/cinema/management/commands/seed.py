@@ -193,6 +193,11 @@ class Command(BaseCommand):
                     "description": data["description"],
                 },
             )
+            # Always ensure poster_url is set (works for existing movies too)
+            if not movie.poster_url and data.get("poster_url"):
+                movie.poster_url = data["poster_url"]
+                movie.save(update_fields=["poster_url"])
+
             if new:
                 if not options["no_posters"]:
                     poster_file = download_poster(
@@ -200,11 +205,11 @@ class Command(BaseCommand):
                     )
                     if poster_file:
                         movie.poster.save(poster_file.name, poster_file, save=True)
-                        self.stdout.write(f"  + {movie.title} (poster)")
+                        self.stdout.write(f"  + {movie.title} (poster + url)")
                     else:
-                        self.stdout.write(f"  + {movie.title} (no poster)")
+                        self.stdout.write(f"  + {movie.title} (url only)")
                 else:
-                    self.stdout.write(f"  + {movie.title}")
+                    self.stdout.write(f"  + {movie.title} (url only)")
                 created += 1
             else:
                 self.stdout.write(f"  = {movie.title} (already exists)")

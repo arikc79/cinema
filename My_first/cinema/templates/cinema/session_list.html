@@ -38,6 +38,8 @@
                         <div class="col-md-3">
                             {% if session.movie.poster %}
                                 <img src="{{ session.movie.poster.url }}" class="img-fluid rounded" alt="{{ session.movie.title }}" style="max-height: 150px; object-fit: cover;">
+                            {% elif session.movie.poster_url %}
+                                <img src="{{ session.movie.poster_url }}" class="img-fluid rounded" alt="{{ session.movie.title }}" style="max-height: 150px; object-fit: cover;">
                             {% else %}
                                 <div class="placeholder-poster" style="height: 150px; font-size: 2rem;">
                                     <i class="fas fa-film"></i>

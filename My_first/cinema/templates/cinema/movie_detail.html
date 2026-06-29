@@ -16,6 +16,8 @@
             <div class="col-md-4">
                 {% if movie.poster %}
                     <img src="{{ movie.poster.url }}" class="movie-detail-poster img-fluid" alt="{{ movie.title }}">
+                {% elif movie.poster_url %}
+                    <img src="{{ movie.poster_url }}" class="movie-detail-poster img-fluid" alt="{{ movie.title }}">
                 {% else %}
                     <div class="placeholder-poster" style="height: 400px;">
                         <i class="fas fa-film"></i>

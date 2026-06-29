@@ -44,6 +44,7 @@ class Movie(models.Model):
         null=True,
         verbose_name='Постер'
     )
+    poster_url = models.URLField(blank=True, default='', verbose_name='URL постера')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
