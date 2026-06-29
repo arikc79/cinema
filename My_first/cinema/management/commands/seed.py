@@ -164,12 +164,14 @@ class Command(BaseCommand):
             self.stdout.write("Cleared all movies.")
 
         # Admin user
-        if not User.objects.filter(username="admin").exists():
-            admin = User.objects.create_superuser("admin", "admin@cinema.local", "admin1234")
-            UserProfile.objects.get_or_create(user=admin)
-            self.stdout.write(self.style.SUCCESS("Created admin / admin1234"))
-        else:
-            self.stdout.write("Admin already exists — skipped.")
+        admin, created_admin = User.objects.get_or_create(username="admin")
+        admin.email = "admin@cinema.local"
+        admin.is_staff = True
+        admin.is_superuser = True
+        admin.set_password("admin1234")
+        admin.save()
+        UserProfile.objects.get_or_create(user=admin)
+        self.stdout.write(self.style.SUCCESS("Admin ready: admin / admin1234"))
 
         # Worker group
         worker_group, _ = Group.objects.get_or_create(name="Робітник")
